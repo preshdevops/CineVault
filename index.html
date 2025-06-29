@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CineVault</title>
+    <link rel="shortcut icon" href="./assets/icon.png" type="image/x-icon" />
+    <link
+      href="https://cdn.boxicons.com/fonts/basic/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- <link rel="stylesheet" href="./genres.html">
+    <a href="http://"></a> -->
+    <script
+      src="https://kit.fontawesome.com/9a6b632d22.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <header>
+      <div class="navigation">
+        <img src="./assets/logo.svg" alt="" />
+        <nav class="navbar navbar-expand-md">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="genres.html">Genres</a></li>
+            <li><a href="watchlist.html">Watchlist</a></li>
+          </ul>
+        </nav>
+        <form action="">
+          <div class="search-bar">
+            <input type="text" placeholder="Search movies....         " />
+            <i class="search-icon fa-solid fa-magnifying-glass"></i>
+          </div>
+        </form>
+      </div>
+    </header>
+
+    <section class="movies">
+      <div class="featured" id="featured">
+        <div class="movie-about">
+          <h5>Featured</h5>
+          <h1 id="featured-title">Inception</h1>
+          <p id="featured-description">
+            A thief who steals corporate secrets through the use of
+            dream-sharing technology is <br />
+            given the inverse task of planting an idea into the mind of a C.E.O.
+          </p>
+          <div class="my-btn">
+                <button
+                    type="button"
+                    name=""
+                    id=""
+                    class="btn btn-primary btn-one"
+                >
+                    Watch now
+                </button>
+                    <button
+                        type="button"
+                        name=""
+                        id=""
+                        class="btn btn-primary btn-two"
+                    >
+                        Add to Watchlist
+                    </button>
+                
+            </div>
+            
+            <!-- <button>Watch now</button>
+            <button>Add to Watchlist</button> -->
+          </div>
+        </div>
+      </div>
+
+      <div class="movie-list" >
+        <div class="description-wrapper">
+          <h3>Trending Now</h3>
+          <div class="view-all">
+            <h4>View all</h4>
+            <i class="fa-solid fa-chevron-right chevron"></i>
+          </div>
+        </div>
+        <div class="trending-movies">
+          <div class="movie-card">
+            <div class="image-wrapper"><img src="./assets/28yearslater.jpg" alt="" /></div>
+            <div class="info">
+              <h3>Interstellar</h3>
+              <h5>2014</h5>
+            </div>
+          </div>
+          <div class="movie-card">
+            <div class="image-wrapper"><img src="./assets/inception.jpg" alt="" /></div>
+            <div class="info">
+              <h3>Inception</h3>
+              <h5>2010</h5>
+            </div>
+          </div>
+          <div class="movie-card">
+            <div class="image-wrapper"><img src="./assets/stranger_things.jpg" alt="" /></div>
+            <div class="info">
+              <h3>Stranger Things</h3>
+              <h5>2016</h5>
+            </div>
+          </div>
+          <div class="movie-card">
+            <div class="image-wrapper"><img src="./assets/inception.jpg" alt="" /></div>
+            <div class="info">
+              <h3>Inception</h3>
+              <h5>2010</h5>
+            </div>
+          </div>
+          <div class="movie-card">
+            <div class="image-wrapper"><img src="./assets/28yearslater.jpg" alt="" /></div>
+            <div class="info">
+              <h3>Gladiator</h3>
+              <h5>2024</h5>
+            </div>
+          </div>
+          <div class="action">
+            <div class="description-wrapper">
+          <h3>Action</h3>
+          <div class="view-all">
+            <h4>View all</h4>
+            <i class="fa-solid fa-chevron-right chevron"></i>
+          </div>
+          </div>
+        </div>
+      
+    </section>
+    <script src="./script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
