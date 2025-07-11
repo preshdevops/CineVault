@@ -1,50 +1,185 @@
 // script.js
 // const API_KEY = '9f2e12cbe9a18cbe4f36bedcb199814b';
-const BASE_URL = 'https://api.themoviedb.org/3';
 const API_KEY = '9f2e12cbe9a18cbe4f36bedcb199814b';
-const IMG_BASE_URL = 'https://image.tmdb.org/t/p/w500';
+const BASE_URL = 'https://api.themoviedb.org/3';
+const IMG_BASE_URL = 'https://image.tmdb.org/t/p/original';
+const SEARCH_URL = 'https://api.themoviedb.org/3/search/movie?query=Jack+Reacher';
 
-// Trending Section
+
+// DOM Elements
+const featured = document.querySelector('#featured');
+const featuredTitle = document.querySelector('#featured-title');
+const featuredDescription = document.querySelector('#featured-description');
+const trendingContainer = document.querySelector('.trending-movies');
+const actionContainer = document.querySelector('.action-movies');
+const romanceContainer = document.querySelector('.romance');
+const search = document.querySelector('.search-bar');
+const input = document.getElementById('searchInput');
+const resultsDiv = document.getElementById('results');
+
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
+// Search movies with debounce
+const searchMovies = debounce((query) => {
+  if (query.length < 2) {
+    resultsDiv.innerHTML = '';
+    resultsDiv.style.display = 'none';
+    return;
+  }
+
+  fetch(`${BASE_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(query)}`)
+    .then(res => res.json())
+    .then(data => {
+      const movies = data.results;
+      resultsDiv.innerHTML = movies
+        .map(movie => `
+          <div class="search-result-item">
+            <img src="${IMG_BASE_URL + (movie.poster_path || '/t/p/w92/no-poster.jpg')}" alt="${movie.title}" />
+            <div>
+              <p>${movie.title}</p>
+              <span>(${movie.release_date?.slice(0, 4) || 'N/A'})</span>
+            </div>
+          </div>
+        `)
+        .join('');
+      resultsDiv.style.display = movies.length ? 'block' : 'none';
+    })
+    .catch(err => {
+      console.error(err);
+      resultsDiv.innerHTML = '<p class="error">Failed to fetch movies 🥲</p>';
+      resultsDiv.style.display = 'block';
+    });
+}, 300);
+
+// Event listener for search input
+input.addEventListener('input', (e) => {
+  const query = e.target.value.trim();
+  searchMovies(query);
+});
+
+// Clear results when clicking outside
+document.addEventListener('click', (e) => {
+  if (!search.contains(e.target) && !resultsDiv.contains(e.target)) {
+    resultsDiv.innerHTML = '';
+    resultsDiv.style.display = 'none';
+  }
+});
+
+// Fetch Trending Movies
 function getTrendingMovies() {
   fetch(`${BASE_URL}/trending/movie/week?api_key=${API_KEY}`)
     .then(res => res.json())
     .then(data => {
-      displayMovies(data.results.slice(0, 5), '.trending-movies');
+      const movies = data.results;
+
+      if (movies.length > 0) {
+        displayFeatured(movies[0]);             // Featured = 1st trending movie
+        displayMovies(movies.slice(1, 17), trendingContainer); // Next 5 = trending
+      }
     })
     .catch(err => console.error('Error fetching trending:', err));
 }
 
-// Action Section
+// Fetch Action Movies
 function getActionMovies() {
   fetch(`${BASE_URL}/discover/movie?api_key=${API_KEY}&with_genres=28`)
     .then(res => res.json())
     .then(data => {
-      displayMovies(data.results.slice(0, 5), '.action-movies');
+      displayMovies(data.results.slice(0, 16), actionContainer);
     })
-    .catch(err => console.error('Error fetching action:', err));
+    .catch(err => console.error('Error fetching action movies:', err));
 }
 
-// Shared display function
-function displayMovies(movies, containerSelector) {
-  const container = document.querySelector(containerSelector);
+// Fetch Romance Movies
+function getRomanceMovies() {
+  fetch(`${BASE_URL}/discover/movie?api_key=${API_KEY}&with_genres=10749, 35`)
+    .then(res => res.json())
+    .then(data => {
+      displayMovies(data.results.slice(0, 16), romanceContainer);
+    })
+    .catch(err => console.error('Error fetching romance movies:', err));
+}
+// Render the Featured Movie
+function displayFeatured(movie) {
+  featuredTitle.textContent = movie.title;
+  featuredDescription.textContent = movie.overview;
+
+  featured.style.backgroundImage = `url(${IMG_BASE_URL + movie.backdrop_path})`;
+  featured.style.backgroundSize = 'cover';
+  featured.style.backgroundPosition = 'center';
+  featured.style.backgroundRepeat = 'no-repeat';
+}
+// display view all
+
+
+// Render search items
+function searchBar() {
+  fetch(`${SEARCH_URL}`, {
+    method: 'GET',
+    headers: {
+      'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5ZjJlMTJjYmU5YTE4Y2JlNGYzNmJlZGNiMTk5ODE0YiIsIm5iZiI6MTc1MTA2NDQ2NS41MDU5OTk4LCJzdWIiOiI2ODVmMWY5MWNjYWU2N2EwNjQxNTVkYmUiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.Cigi1xN0-FKvyYoU0JlElHFleJ4CE90LZNK3DLx-qqc',
+
+    }
+
+  
+  }
+  )
+}
+
+// Reusable function to render movie cards
+// function displayMovies(movies, container) {
+//   container.innerHTML = '';
+
+//   movies.forEach(movie => {
+//     const movieCard = `
+//       <div class="movie-card">
+//         <div class="image-wrapper">
+//           <img src="${IMG_BASE_URL + movie.poster_path}" alt="${movie.title}" />
+//         </div>
+//         <div class="info">
+//           <h3>${movie.title}</h3>
+//           <h5>${movie.release_date?.slice(0, 8)}</h5>
+//         </div>
+//       </div>
+//     `;
+//     container.innerHTML += movieCard;
+//   });
+// }
+function displayMovies(movies, container) {
   container.innerHTML = '';
 
   movies.forEach(movie => {
-    const movieCard = `
-      <div class="movie-card">
+    const movieCard = document.createElement('div');
+    movieCard.classList.add('movie-card');
+
+    movieCard.innerHTML = `
+      <a href="movie.html?id=${movie.id}">
         <div class="image-wrapper">
           <img src="${IMG_BASE_URL + movie.poster_path}" alt="${movie.title}" />
         </div>
         <div class="info">
           <h3>${movie.title}</h3>
-          <h5>${movie.release_date?.slice(0, 4)}</h5>
+          <h5>${movie.release_date?.slice(0, 8)}</h5>
         </div>
-      </div>
+      </a>
     `;
-    container.innerHTML += movieCard;
+
+    container.appendChild(movieCard);
   });
 }
 
-// 🔥 Load both on page
+
+// Load All Sections
 getTrendingMovies();
 getActionMovies();
+getRomanceMovies();

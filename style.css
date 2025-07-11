@@ -1,10 +1,11 @@
-*{
+/* Reset and root variables remain the same */
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    /* outline: 1px solid red; */
 }
-:root{
+
+:root {
     --white: #F3F4F6;
     --white_alt: #E5E7EB;
     --black: #000000;
@@ -20,236 +21,381 @@
     --second_button: #1F2937;
     --first_button: #9333EA;
 }
-body{
+
+body {
     background-color: var(--deep_blue);
     font-family: 'Inter', sans-serif;
 }
-header{
+
+/* Header and Navigation */
+header {
     height: 5rem;
     width: 100%;
     background-color: var(--nav_color);
-    /* position: fixed; */
     position: sticky;
     top: 0;
     left: 0;
-    /* margin-top: auto; */
-    margin-bottom: 2.5rem;
     z-index: 1000;
 }
-.navigation{
+
+.navigation {
     display: flex;
     justify-content: space-between;
-    width: 80%;
+    width: 90%; /* Slightly more flexible */
     margin: 0 auto;
-    padding: 0 auto;
-    padding-top: 1rem;
-    margin-bottom: auto;
-    position: sticky;
-    top: 0;
+    padding: 1rem 0;
+    align-items: center;
 }
-.navigation img{
+
+.navigation img {
     display: block;
-    margin-top: auto;
+    max-height: 2.5rem; /* Ensure logo scales */
 }
-.navigation nav ul li{
-    color: var(--navtext_about_color);
-    list-style: none;
+
+.navigation nav ul {
     display: flex;
-    margin: 15rem 1.5rem;
-    padding: 0 auto;
-    display: inline;
-    position: relative;
-    bottom: -0.5rem;
+    list-style: none;
 }
-.navigation nav ul li a{
+
+.navigation nav ul li {
+    color: var(--navtext_about_color);
+    margin: 0 1rem;
+    font-size: 1rem;
+}
+
+.navigation nav ul li a {
     text-decoration: none;
     color: var(--navtext_about_color);
 }
+
 .navigation nav ul li a:hover {
-  color: #A855F7; /* Light purple */
-  transition: 0.3s ease;
-  cursor: pointer;
+    color: #A855F7;
+    transition: 0.3s ease;
+    cursor: pointer;
 }
 
-.search-bar{
+/* Search Bar */
+.search-bar {
     background-color: var(--box_blue);
     border-radius: 26px;
-    padding: 0.5rem 0.25rem;
-    margin-top: auto;
+    padding: 0.5rem 0.75rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 20rem;
+    max-width: 100%; /* Prevent overflow on small screens */
 }
-.search-bar input{
+
+.search-bar input {
     background-color: transparent;
     border: none;
     outline: none;
+    font-size: 0.9rem;
+    width: 100%;
+    margin-left: 0.5rem;
+    color: var(--button_white);
+}
+
+.search-bar input::placeholder {
+    color: var(--navtext_about_color);
+}
+
+.search-bar .search-icon {
+    color: var(--button_white);
+    font-size: 1rem;
+}
+
+.search-bar:focus-within {
+    border: 1px solid var(--first_button);
+    box-shadow: 0 0 0 1px var(--first_button);
+}
+
+.search-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--box_blue);
+    border-radius: 8px;
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 1000;
+    display: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.search-result-item {
     display: flex;
     align-items: center;
-    display: inline;
-    margin: 0 auto;
-    padding: 16;
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--nav_color);
+    cursor: pointer;
+}
+
+.search-result-item:hover {
+    background-color: var(--second_button);
+}
+
+.search-result-item img {
+    width: 40px;
+    height: 60px;
+    object-fit: cover;
+    margin-right: 10px;
+    border-radius: 4px;
+}
+
+.search-result-item p {
+    color: var(--white);
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.search-result-item span {
+    color: var(--bluish_grey);
     font-size: 0.8rem;
-    width: 16rem;
-    margin-left: 14px;
-    color: var(--button_white);
 }
-.search-bar .search-icon{
-    color: var(--button_white);
+
+.search-result-item .error {
+    color: var(--white);
+    text-align: center;
 }
- .search-bar:focus-within {
-  outline: none;
-  border: 1px solid #9333EA;
-  box-shadow: 0 0 0 1px #A855F7;
-}
-.movies{
-    width: 80%;
+
+/* Movies Section */
+.movies {
+    width: 90%;
     margin: 0 auto;
-    padding: 0 auto;
+    padding: 1rem 0;
 }
-.movies .featured{
+
+.movies .featured {
     background-color: var(--bluish_grey);
     display: flex;
-    background-image:
-    linear-gradient(to right, rgba(0, 0, 0, 50), transparent),
-    url(./assets/inception_large_alt.jpg);
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.5), transparent), url(./assets/inception_large.jpg);
     background-size: cover;
-    height: 380px;
+    height: 20rem; /* Reduced for mobile, will adjust with media queries */
     background-position: center;
     border-radius: 16px;
     flex-direction: column;
-    border: none;
-    outline: none;
-    box-shadow: -10px 0 15px rgba(0, 0, 0, 0.5);
     margin-bottom: 2rem;
-    margin-top: 0.5rem;
 }
-.movies .featured .movie-about{
+
+.movies .featured .movie-about {
     position: relative;
-    top: 45%;
+    top: 40%;
     left: 10px;
+    padding: 1rem;
 }
-.movies .featured .movie-about h5{
+
+.movies .featured .movie-about h5 {
     color: var(--first_button);
-    font-family: 'Inter-semibold', sans-serif;
+    font-size: 0.9rem;
 }
-.movie-about h1{
+
+.movie-about h1 {
     color: var(--white);
-    font-family: 'Inter-Bold', sans-serif;
-    font-weight: 800;
+    font-size: 1.5rem;
 }
-.movie-about p{
+
+.movie-about p {
     color: var(--navtext_about_color);
-    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
 }
-.movie-about .my-btn .btn-primary{
+
+.movie-about .my-btn .btn-primary {
     margin: 0 0.2rem;
     border: none;
     outline: none;
     border-radius: 30px;
-    width: 10%;
-    font-family: 'Inter', sans-serif;
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
 }
-.movie-about .my-btn .btn-one{
+
+.movie-about .my-btn .btn-one {
     background-color: var(--first_button);
 }
-.movie-about .my-btn .btn-two{
+
+.movie-about .my-btn .btn-two {
     background-color: var(--second_button);
     white-space: nowrap;
-    width: 15%;
 }
-.trending-movies{
+
+/* Movie Cards */
+.trending-movies, .action-movies, .romance {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 3rem;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
 }
-.description-wrapper{
-    display: flex;
-    justify-content: space-between;
-}
-.description-wrapper h3{
-    color: var(--white);
-    font-family: 'Inter-Bold', sans-serif;
-    font-size: 1.2rem;
-    font-weight: 700;
-}
-.trending-movies .movie-card:hover{
-    transform: scale(1.05);
-}
-.image-wrapper:hover{
-    background-image: linear-gradient(to top, rgba(10, 2, 2, 0.897), rgba(0, 0, 0, 0.2));
-}
-.movie-card{
+
+.movie-card {
     background-color: var(--box_blue);
     border-radius: 0.5rem;
-    /* padding: 1rem; */
-    position: relative;
     overflow: hidden;
     transition: transform 0.3s ease;
-    /* width: 179px;
-    height: 332px; */
     width: 100%;
-    /* aspect-ratio: 2 / 3; */
     height: auto;
-    /* position: relative; */
-    outline: none;
-    border: none;
 }
-/* .image-wrapper{
-  width: 100%;
-  aspect-ratio: 2 / 3;
-  overflow: hidden;
-  border-radius: 16px 16px 0 0;
-  height: auto;
-} */
 
-.movie-card .image-wrapper img{
+.movie-card .image-wrapper img {
     width: 100%;
-    /* width: 180px; */
-    height: 295px;
-    margin: 0 auto;
-    padding: 0;
+    height: 200px; /* Adjusted for responsiveness */
+    object-fit: cover;
     display: block;
-    /* object-fit: cover; */
-    margin-bottom: 0.5rem;
 }
-.movie-card h3{
+.movie-card:hover{
+    cursor: pointer;
+    transform: scale(1.2);
+}
+.movie-card h3 {
     color: var(--white);
-    /* position: relative; */
-    font-family: 'Inter-semibold', sans-serif;
-    font-size: 1rem;
-    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    margin: 0.5rem;
 }
-.movie-card h5{
-    color: var(--bluish_grey);
-    font-family: 'Inter', sans-serif;
-    font-size: 0.8rem;
-    margin-right: 2rem;
-}
-.movie-card .info{
-    margin-left: 1rem;
-}
-.description-wrapper{
-    margin: auto;
-    padding: 0 auto;
-}
-.description-wrapper h3{
-    color: var(--bluish_grey);
-    
-}
-.description-wrapper h4{
-    color: var(--more_label);
-    /* position: relative; */
-    font-size: 1rem;
-    /* left: 33rem; */
 
+.movie-card h5 {
+    color: var(--bluish_grey);
+    font-size: 0.7rem;
+    margin: 0 0.5rem 0.5rem;
 }
-.description-wrapper .chevron{
+
+.description-wrapper {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1rem;
+}
+
+.description-wrapper h3 {
+    color: var(--white);
+    font-size: 1.2rem;
+}
+
+.description-wrapper h4 {
+    color: var(--more_label);
+    font-size: 1rem;
+}
+
+.description-wrapper .chevron {
     color: var(--more_label);
     font-size: 0.6rem;
-    position: relative;
-    bottom: 0.2rem
 }
-.view-all{
+
+.view-all {
     display: flex;
     align-items: center;
     gap: 6px;
+    padding: 0 1rem;
 }
 
+.view-all:hover {
+    cursor: pointer;
+}
+footer{
+    background-color: var(--deep_blue);
+}
+.foot{
+    width: 80%;
+}
+/* Media Queries */
+@media (max-width: 1024px) {
+    .navigation {
+        width: 95%;
+    }
+
+    .search-bar {
+        width: 15rem;
+    }
+
+    .movies .featured {
+        height: 18rem;
+    }
+
+    .movie-card .image-wrapper img {
+        height: 180px;
+    }
+}
+
+@media (max-width: 768px) {
+    .navigation {
+        flex-direction: column;
+        padding: 0.5rem 0;
+    }
+
+    .navigation nav ul {
+        flex-direction: column;
+        align-items: center;
+        margin-top: 0.5rem;
+    }
+
+    .navigation nav ul li {
+        margin: 0.5rem 0;
+    }
+
+    .search-bar {
+        width: 100%;
+        margin-top: 0.5rem;
+    }
+
+    .movies {
+        width: 95%;
+    }
+
+    .movies .featured {
+        height: 15rem;
+    }
+
+    .movie-about h1 {
+        font-size: 1.2rem;
+    }
+
+    .movie-about p {
+        font-size: 0.8rem;
+    }
+
+    .trending-movies, .action-movies, .romance {
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    }
+
+    .movie-card .image-wrapper img {
+        height: 150px;
+    }
+}
+
+@media (max-width: 480px) {
+    .movies .featured {
+        height: 12rem;
+    }
+
+    .movie-about {
+        top: 30%;
+    }
+
+    .movie-about h1 {
+        font-size: 1rem;
+    }
+
+    .movie-about p {
+        font-size: 0.7rem;
+    }
+
+    .movie-about .my-btn .btn-primary {
+        padding: 0.3rem 0.8rem;
+        font-size: 0.7rem;
+    }
+
+    .trending-movies, .action-movies, .romance {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 1rem;
+    }
+
+    .movie-card .image-wrapper img {
+        height: 120px;
+    }
+
+    .movie-card h3 {
+        font-size: 0.8rem;
+    }
+
+    .movie-card h5 {
+        font-size: 0.6rem;
+    }
+}

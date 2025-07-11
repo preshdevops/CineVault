@@ -1,0 +1,131 @@
+header {
+    height: 5rem;
+    width: 100%;
+    background-color: var(--nav_color);
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    width: 90%; /* Slightly more flexible */
+    margin: 0 auto;
+    padding: 1rem 0;
+    align-items: center;
+}
+
+.navigation img {
+    display: block;
+    max-height: 2.5rem; /* Ensure logo scales */
+}
+
+.navigation nav ul {
+    display: flex;
+    list-style: none;
+}
+
+.navigation nav ul li {
+    color: var(--navtext_about_color);
+    margin: 0 1rem;
+    font-size: 1rem;
+}
+
+.navigation nav ul li a {
+    text-decoration: none;
+    color: var(--navtext_about_color);
+}
+
+.navigation nav ul li a:hover {
+    color: #A855F7;
+    transition: 0.3s ease;
+    cursor: pointer;
+}
+
+/* Search Bar */
+.search-bar {
+    background-color: var(--box_blue);
+    border-radius: 26px;
+    padding: 0.5rem 0.75rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 20rem;
+    max-width: 100%; /* Prevent overflow on small screens */
+}
+
+.search-bar input {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-size: 0.9rem;
+    width: 100%;
+    margin-left: 0.5rem;
+    color: var(--button_white);
+}
+
+.search-bar input::placeholder {
+    color: var(--navtext_about_color);
+}
+
+.search-bar .search-icon {
+    color: var(--button_white);
+    font-size: 1rem;
+}
+
+.search-bar:focus-within {
+    border: 1px solid var(--first_button);
+    box-shadow: 0 0 0 1px var(--first_button);
+}
+
+.search-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--box_blue);
+    border-radius: 8px;
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 1000;
+    display: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.search-result-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--nav_color);
+    cursor: pointer;
+}
+
+.search-result-item:hover {
+    background-color: var(--second_button);
+}
+
+.search-result-item img {
+    width: 40px;
+    height: 60px;
+    object-fit: cover;
+    margin-right: 10px;
+    border-radius: 4px;
+}
+
+.search-result-item p {
+    color: var(--white);
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.search-result-item span {
+    color: var(--bluish_grey);
+    font-size: 0.8rem;
+}
+
+.search-result-item .error {
+    color: var(--white);
+    text-align: center;
+}

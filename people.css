@@ -98,3 +98,39 @@ header{
   border: 1px solid #9333EA;
   box-shadow: 0 0 0 1px #A855F7;
 }
+.genres{
+    width: 80%;
+    margin: 0 auto;
+    padding: 0 auto;
+}
+.genres .genre-box{
+    display: flexbox;
+    background-color: var(--box_blue);
+    width: 5%;
+    height: 10%;
+}
+.genre-box h3{
+    color: var(--navtext_about_color);
+}
+.people{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    /* grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); */
+    gap: 1.5rem;
+    width: 80%;
+    margin: 0 auto;
+    padding: 0 auto;
+}
+.people-img{
+    transition: transform 0.3s ease;
+}
+.people-img:hover{
+    transform: scale(1.2);
+}
+.image img{
+    display: block;
+    border-radius: 7px;
+}
+.name p{
+    color: var(--navtext_about_color);
+}

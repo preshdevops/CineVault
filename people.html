@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>People</title>
+    <link rel="shortcut icon" href="./assets/icon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="global.css">
+    <link rel="stylesheet" href="people.css">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet">
+      <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://kit.fontawesome.com/9a6b632d22.js"
+      crossorigin="anonymous"
+    ></script>
+</head>
+<body>
+    <header>
+      <div class="navigation">
+        <img src="./assets/logo.svg" alt="" />
+        <nav class="navbar navbar-expand-md">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="genres.html">People</a></li>
+            <li><a href="watchlist.html">Watchlist</a></li>
+          </ul>
+        </nav>
+        <form action="">
+          <div class="search-bar">
+            <input type="text" placeholder="Search movies....         " />
+            <i class="search-icon fa-solid fa-magnifying-glass"></i>
+          </div>
+        </form>
+      </div>
+    </header>
+
+    <div id="people" class="people">
+       
+    </div>
+
+    <script>
+      const apiKey = '9f2e12cbe9a18cbe4f36bedcb199814b';
+      const peopleContainer = document.getElementById('people')
+      // const params = new URLSearchParams(window.location.search);
+      // const movieId = params.get('id');
+
+      
+
+      fetch(`https://api.themoviedb.org/3/person/popular?api_key=${apiKey}`)
+        .then(res => res.json())
+        .then(data => {
+          const peopleHTML = data.results.map(person => {
+            return `
+          <div class="people-img">
+            <div class="image"><img src="https://image.tmdb.org/t/p/w185${person.profile_path}"></div>
+            <div class="name">
+              <p>${person.name}</p>
+            </div>
+          </div>
+          
+          
+          
+          
+          `;
+
+
+          }).join("");
+          peopleContainer.innerHTML = peopleHTML
+          
+        })
+        .catch(err => {
+          document.getElementById("people").textContent = "Person not found 😭";
+          console.log("Fetch: error", err);
+        });
+      
+    </script>
+</body>
+</html>
+
+
+<!-- const options = {
+  method: 'GET',
+  headers: {
+    accept: 'application/json',
+    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5ZjJlMTJjYmU5YTE4Y2JlNGYzNmJlZGNiMTk5ODE0YiIsIm5iZiI6MTc1MTA2NDQ2NS41MDU5OTk4LCJzdWIiOiI2ODVmMWY5MWNjYWU2N2EwNjQxNTVkYmUiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.Cigi1xN0-FKvyYoU0JlElHFleJ4CE90LZNK3DLx-qqc'
+  }
+};
+
+
+  .then(res => res.json())
+  .then(res => console.log(res))
+  .catch(err => console.error(err)); -->

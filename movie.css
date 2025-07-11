@@ -1,0 +1,121 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root{
+    --white: #F3F4F6;
+    --white_alt: #E5E7EB;
+    --black: #000000;
+    --bluish_grey: #9CA3AF;
+    --deep_blue: #111827;
+    --box_blue: #1F2937;
+    --rating_color: #000000;
+    --star_color: #EAB308;
+    --more_label: #C084FC;
+    --navtext_about_color: #D1D5DB;
+    --button_white: #FFFFFF;
+    --nav_color: #030712;
+    --second_button: #1F2937;
+    --first_button: #9333EA;
+}
+html, body{
+    font-family: 'Inter', sans-serif;
+    background-color: var(--deep_blue) !important;
+}
+header{
+    height: 5rem;
+    width: 100%;
+    background-color: var(--nav_color);
+    /* position: fixed; */
+    position: sticky;
+    top: 0;
+    left: 0;
+    /* margin-top: auto; */
+    margin-bottom: 2.5rem;
+    z-index: 1000;
+}
+.navigation{
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: 0 auto;
+    padding: 0 auto;
+    padding-top: 1rem;
+    margin-bottom: auto;
+    position: sticky;
+    top: 0;
+}
+.navigation img{
+    display: block;
+    margin-top: auto;
+}
+.navigation nav ul li{
+    color: var(--navtext_about_color);
+    list-style: none;
+    display: flex;
+    margin: 15rem 1.5rem;
+    padding: 0 auto;
+    display: inline;
+    position: relative;
+    bottom: -0.5rem;
+}
+.navigation nav ul li a{
+    text-decoration: none;
+    color: var(--navtext_about_color);
+}
+.navigation nav ul li a:hover {
+  color: #A855F7; /* Light purple */
+  transition: 0.3s ease;
+  cursor: pointer;
+}
+
+.search-bar{
+    background-color: var(--box_blue);
+    border-radius: 26px;
+    padding: 0.5rem 0.25rem;
+    margin-top: auto;
+}
+.search-bar input{
+    background-color: transparent;
+    border: none;
+    outline: none;
+    display: flex;
+    align-items: center;
+    display: inline;
+    margin: 0 auto;
+    padding: 16;
+    font-size: 0.8rem;
+    width: 16rem;
+    margin-left: 14px;
+    color: var(--button_white);
+}
+.search-bar .search-icon{
+    color: var(--button_white);
+}
+ .search-bar:focus-within {
+  outline: none;
+  border: 1px solid #9333EA;
+  box-shadow: 0 0 0 1px #A855F7;
+}
+.movie-details{
+    display: flex;
+    width: 80%;
+    margin: 0 auto;
+    padding: 0 auto;
+    gap: 2.5rem;
+}
+.movie-details .about-container h1{
+    color: var(--navtext_about_color);
+    text-transform: uppercase;
+    font-size: 32px;
+    font-weight: bold;
+}
+.movie-details .image img{
+    width: 300px;
+    height: 450px;
+}
+.about-container{
+    margin-left: auto;
+    color: var(--navtext_about_color);
+}

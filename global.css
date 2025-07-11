@@ -1,0 +1,25 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root{
+    --white: #F3F4F6;
+    --white_alt: #E5E7EB;
+    --black: #000000;
+    --bluish_grey: #9CA3AF;
+    --deep_blue: #111827;
+    --box_blue: #1F2937;
+    --rating_color: #000000;
+    --star_color: #EAB308;
+    --more_label: #C084FC;
+    --navtext_about_color: #D1D5DB;
+    --button_white: #FFFFFF;
+    --nav_color: #030712;
+    --second_button: #1F2937;
+    --first_button: #9333EA;
+}
+body, html{
+    font-family: 'Inter', sans-serif;
+    background-color: var(--deep_blue) !important;
+}
