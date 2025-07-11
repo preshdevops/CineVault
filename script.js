@@ -1,44 +1,33 @@
 // script.js
 // const API_KEY = '9f2e12cbe9a18cbe4f36bedcb199814b';
-const API_KEY = '9f2e12cbe9a18cbe4f36bedcb199814b'; // Replace this with your TMDB API key
 const BASE_URL = 'https://api.themoviedb.org/3';
-const IMG_BASE_URL = 'https://image.tmdb.org/t/p/original';
+const API_KEY = '9f2e12cbe9a18cbe4f36bedcb199814b';
+const IMG_BASE_URL = 'https://image.tmdb.org/t/p/w500';
 
-// DOM Elements
-const featured = document.querySelector('#featured');
-const featuredTitle = document.querySelector('#featured-title');
-const featuredDescription = document.querySelector('#featured-description');
-const trendingContainer = document.querySelector('.trending-movies');
-
-// Fetch trending movies from TMDB
+// Trending Section
 function getTrendingMovies() {
   fetch(`${BASE_URL}/trending/movie/week?api_key=${API_KEY}`)
     .then(res => res.json())
     .then(data => {
-      const movies = data.results;
-
-      if (movies.length > 0) {
-        displayFeatured(movies[0]);             // Show the first as featured
-        displayTrending(movies.slice(1, 6));    // Next 5 as trending
-      }
+      displayMovies(data.results.slice(0, 5), '.trending-movies');
     })
-    .catch(err => console.error('Error fetching movies:', err));
+    .catch(err => console.error('Error fetching trending:', err));
 }
 
-// Display the featured movie in the hero/banner
-function displayFeatured(movie) {
-  featuredTitle.textContent = movie.title;
-  featuredDescription.textContent = movie.overview;
-
-  featured.style.backgroundImage = `url(${IMG_BASE_URL + movie.backdrop_path})`;
-  featured.style.backgroundSize = 'cover';
-  featured.style.backgroundPosition = 'center';
-  featured.style.backgroundRepeat = 'no-repeat';
+// Action Section
+function getActionMovies() {
+  fetch(`${BASE_URL}/discover/movie?api_key=${API_KEY}&with_genres=28`)
+    .then(res => res.json())
+    .then(data => {
+      displayMovies(data.results.slice(0, 5), '.action-movies');
+    })
+    .catch(err => console.error('Error fetching action:', err));
 }
 
-// Display the 5 trending movie cards
-function displayTrending(movies) {
-  trendingContainer.innerHTML = '';
+// Shared display function
+function displayMovies(movies, containerSelector) {
+  const container = document.querySelector(containerSelector);
+  container.innerHTML = '';
 
   movies.forEach(movie => {
     const movieCard = `
@@ -52,9 +41,10 @@ function displayTrending(movies) {
         </div>
       </div>
     `;
-    trendingContainer.innerHTML += movieCard;
+    container.innerHTML += movieCard;
   });
 }
 
-// Kick things off
+// 🔥 Load both on page
 getTrendingMovies();
+getActionMovies();
