@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Movie Title</title>
     <link rel="shortcut icon" href="./assets/icon.png" type="image/x-icon" />
-    <link rel="stylesheet" href="global.css">
-    <link rel="stylesheet" href="movie.css">
+    <link rel="stylesheet" href="global.css" />
+    <link rel="stylesheet" href="movie.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
-      rel="stylesheet">
-      <link
+      rel="stylesheet"
+    />
+    <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
@@ -20,12 +21,13 @@
       src="https://kit.fontawesome.com/9a6b632d22.js"
       crossorigin="anonymous"
     ></script>
-</head>
-<body>
-  <header>
+  </head>
+  <body>
+    <header>
       <div class="navigation">
-        <img src="./assets/logo.svg" alt="" />
-        <nav class="navbar navbar-expand-md">
+        <img src="./assets/logo.svg" alt="Website logo" />
+        <div class="hamburger" id="hamburger"><i class="fa-solid fa-bars"></i></div>
+        <nav class="navbar">
           <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="people.html">People</a></li>
@@ -34,56 +36,138 @@
         </nav>
         <form action="">
           <div class="search-bar">
-            <input type="text" id="searchInput" placeholder="Search movies..." />
-            <span class="search-icon"><i class="search-icon fa-solid fa-magnifying-glass"></i></span>
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="Search movies..."
+              aria-label="Search movies"
+            />
+            <span class="search-icon">
+              <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+            </span>
             <div id="results" class="search-results"></div>
           </div>
         </form>
       </div>
     </header>
-    <!-- movie.html -->
-<div id="movie-details" class="movie-details">
-  
-</div>
+    <div id="movie-details" class="movie-details"></div>
 
-
-<script>
-const apiKey = '9f2e12cbe9a18cbe4f36bedcb199814b';
-const params = new URLSearchParams(window.location.search);
-const movieId = params.get('id');
-
-// Get movie details
-fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}`)
-  .then(res => res.json())
-  .then(movie => {
-    document.getElementById('movie-details').innerHTML = `
-    <div class="image">
-        <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" />
-      </div>  
-    <div class="about-container">
-        <h1>${movie.title}</h1>
-        <h2>${movie.tagline}</h2>
-        <p class="date"><strong>Release Date:</strong> ${movie.release_date}</p>
-        <p><strong>Overview:</strong> ${movie.overview}</p>
-        <p><strong>Rating:</strong> ${movie.vote_average} / 10</p>
+    <footer>
+      <div class="foot">
+        <img src="./assets/logo.svg" alt="" />
       </div>
-    `;
-  })
-  .catch(err => {
-    document.getElementById('movie-details').textContent = 'Movie not found 😔';
-    console.error(err);
+      <div class="socials">
+        <i class="fa-brands fa-instagram"></i>
+        <i class="fa-brands fa-facebook"></i>
+        <i class="fa-brands fa-linkedin"></i>
+      </div>
+      <div class="footer-right">
+        <p>&copy; 2025 CineVault</p>
+      </div>
+    </footer>
+
+    <script>
+      const apiKey = "9f2e12cbe9a18cbe4f36bedcb199814b";
+      const params = new URLSearchParams(window.location.search);
+      const movieId = params.get("id");
+
+      document.addEventListener('DOMContentLoaded', () => {
+      const hamburger = document.getElementById('hamburger');
+      const navbar = document.querySelector('.navbar');
+
+      hamburger.addEventListener('click', () => {
+    navbar.classList.toggle('show');
   });
+});
 
-// Get movie videos (like trailers)
-fetch(`https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${apiKey}&language=en-US`)
-  .then(res => res.json())
-  .then(res => {
-    console.log(res);
-    // You could embed the trailer here too if you want
-  })
-  .catch(err => console.error(err));
+      // Add to watchlist function
+      function addToWatchlist(movie) {
+        let watchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
+        if (watchlist.some((m) => m.id === movie.id)) {
+          alert(`${movie.title} is already in your watchlist!`);
+          return;
+        }
+        watchlist.push({
+          id: movie.id,
+          title: movie.title,
+          poster_path: movie.poster_path,
+          release_date: movie.release_date,
+        });
+        localStorage.setItem("watchlist", JSON.stringify(watchlist));
+        alert(`${movie.title} added to your watchlist! 🎉`);
+      }
 
-</script>
+      // Get movie details
+      fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}`)
+        .then((res) => {
+          if (!res.ok) throw new Error("Failed to fetch movie details");
+          return res.json();
+        })
+        .then((movie) => {
+          document.getElementById("movie-details").innerHTML = `
+            <div class="image">
+              <img 
+                src="${movie.poster_path 
+                  ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` 
+                  : "no-poster.jpg"}" 
+                alt="${movie.title} poster" 
+              />
+            </div>  
+            <div class="about-container">
+              <h1>${movie.title}</h1>
+              <h2>${movie.tagline || "No tagline available"}</h2>
+              <p class="date"><strong>Release Date:</strong> ${movie.release_date || "N/A"}</p>
+              <p><strong>Overview:</strong> ${movie.overview || "No overview available"}</p>
+              <p><strong>Rating:</strong> ${movie.vote_average ? movie.vote_average.toFixed(1) : "N/A"} / 10</p>
+              <button 
+                class="btn btn-primary" 
+                onclick="addToWatchlist({
+                  id: ${movie.id}, 
+                  title: '${movie.title.replace(/'/g, "\\'")}', 
+                  poster_path: '${movie.poster_path || ""}', 
+                  release_date: '${movie.release_date || ""}'
+                })"
+                aria-label="Add ${movie.title} to watchlist"
+              >Add to Watchlist</button>
+            </div>
+          `;
+        })
+        .catch((err) => {
+          document.getElementById("movie-details").innerHTML = `
+            <p class="error">Movie not found 😔</p>
+          `;
+          console.error("Error fetching movie details:", err);
+        });
 
-</body>
+      // Get movie videos (like trailers)
+      fetch(
+        `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${apiKey}&language=en-US`
+      )
+        .then((res) => {
+          if (!res.ok) throw new Error("Failed to fetch movie videos");
+          return res.json();
+        })
+        .then((res) => {
+          console.log("Movie videos:", res);
+          // Optionally embed a trailer here, e.g., YouTube iframe for the first trailer
+          const trailer = res.results.find((video) => video.type === "Trailer" && video.site === "YouTube");
+          if (trailer) {
+            document.getElementById("movie-details").innerHTML += `
+              <div class="trailer">
+                <h3>Trailer</h3>
+                <iframe 
+                  width="560" 
+                  height="315" 
+                  src="https://www.youtube.com/embed/${trailer.key}" 
+                  title="${trailer.name}" 
+                  frameborder="0" 
+                  allowfullscreen
+                ></iframe>
+              </div>
+            `;
+          }
+        })
+        .catch((err) => console.error("Error fetching movie videos:", err));
+    </script>
+  </body>
 </html>

@@ -33,7 +33,8 @@
     <header>
       <div class="navigation">
         <img src="./assets/logo.svg" alt="" />
-        <nav class="navbar navbar-expand-md">
+        <div class="hamburger" id="hamburger"><i class="fa-solid fa-bars"></i></div>
+        <nav class="navbar">
           <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="people.html">People</a></li>
@@ -42,14 +43,20 @@
         </nav>
         <form action="">
           <div class="search-bar">
-            <input type="text" id="searchInput" placeholder="Search movies..." />
-            <span class="search-icon"><i class="search-icon fa-solid fa-magnifying-glass"></i></span>
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="Search movies..."
+            />
+            <span class="search-icon"
+              ><i class="search-icon fa-solid fa-magnifying-glass"></i
+            ></span>
             <div id="results" class="search-results"></div>
           </div>
         </form>
       </div>
     </header>
-<!--  -->
+
     <section class="movies">
       <div class="featured" id="featured">
         <div class="movie-about">
@@ -61,32 +68,20 @@
             given the inverse task of planting an idea into the mind of a C.E.O.
           </p>
           <div class="my-btn">
-                <button
-                    type="button"
-                    name=""
-                    id=""
-                    class="btn btn-primary btn-one"
-                >
-                    Watch now
-                </button>
-                    <button
-                        type="button"
-                        name=""
-                        id=""
-                        class="btn btn-primary btn-two"
-                    >
-                        Add to Watchlist
-                    </button>
-                
-            </div>
-            
-            <!-- <button>Watch now</button>
-            <button>Add to Watchlist</button> -->
+            <button type="button" name="" id="" class="btn btn-primary btn-one">
+              Watch now
+            </button>
+            <button type="button" name="" id="add-to-watchlist-featured" class="btn btn-primary btn-two" >
+              Add to Watchlist
+            </button>
           </div>
+
+          <!-- <button>Watch now</button>
+            <button>Add to Watchlist</button> -->
         </div>
       </div>
 
-      <div class="movie-list" >
+      <div class="movie-list">
         <div class="description-wrapper">
           <h3>Trending Now</h3>
           <div class="view-all">
@@ -96,35 +91,46 @@
         </div>
         <div class="trending-movies">
           <div class="movie-card">
-            <div class="image-wrapper"><img src="./assets/28yearslater.jpg" alt="" /></div>
+            <div class="image-wrapper">
+              <img src="./assets/28yearslater.jpg" alt="" />
+              <i class="fa-solid fa-plus plus"></i>
+            </div>
             <div class="info">
               <h3>Interstellar</h3>
               <h5>2014</h5>
             </div>
           </div>
           <div class="movie-card">
-            <div class="image-wrapper"><img src="./assets/inception.jpg" alt="" /></div>
+            <div class="image-wrapper">
+              <img src="./assets/inception.jpg" alt="" />
+            </div>
             <div class="info">
               <h3>Inception</h3>
               <h5>2010</h5>
             </div>
           </div>
           <div class="movie-card">
-            <div class="image-wrapper"><img src="./assets/stranger_things.jpg" alt="" /></div>
+            <div class="image-wrapper">
+              <img src="./assets/stranger_things.jpg" alt="" />
+            </div>
             <div class="info">
               <h3>Stranger Things</h3>
               <h5>2016</h5>
             </div>
           </div>
           <div class="movie-card">
-            <div class="image-wrapper"><img src="./assets/inception.jpg" alt="" /></div>
+            <div class="image-wrapper">
+              <img src="./assets/inception.jpg" alt="" />
+            </div>
             <div class="info">
               <h3>Inception</h3>
               <h5>2010</h5>
             </div>
           </div>
           <div class="movie-card">
-            <div class="image-wrapper"><img src="./assets/28yearslater.jpg" alt="" /></div>
+            <div class="image-wrapper">
+              <img src="./assets/28yearslater.jpg" alt="" />
+            </div>
             <div class="info">
               <h3>Gladiator</h3>
               <h5>2024</h5>
@@ -134,51 +140,61 @@
       </div>
       <div class="movie-list">
         <div class="action">
-            <div class="description-wrapper">
-          <h3>Action</h3>
-          <div class="view-all">
-            <h4>View all</h4>
-            <i class="fa-solid fa-chevron-right chevron"></i>
-          </div>
+          <div class="description-wrapper">
+            <h3>Action</h3>
+            <div class="view-all">
+              <h4>View all</h4>
+              <i class="fa-solid fa-chevron-right chevron"></i>
+            </div>
           </div>
           <div class="action-movies">
-          <div class="movie-card">
-            <div class="image-wrapper"><img src="./assets/28yearslater.jpg" alt="" /></div>
-            <div class="info">
-              <h3>Interstellar</h3>
-              <h5>2014</h5>
-            </div>
-          </div>
-             <div class="movie-card">
-            <div class="image-wrapper"><img src="./assets/28yearslater.jpg" alt="" /></div>
-            <div class="info">
-              <h3>Interstellar</h3>
-              <h5>2014</h5>
-            </div>
-             </div>
             <div class="movie-card">
-            <div class="image-wrapper"><img src="./assets/28yearslater.jpg" alt="" /></div>
-            <div class="info">
-              <h3>Interstellar</h3>
-              <h5>2014</h5>
-            </div>
+              <div class="image-wrapper">
+                <img src="./assets/28yearslater.jpg" alt="" />
+              </div>
+              <div class="info">
+                <h3>Interstellar</h3>
+                <h5>2014</h5>
+              </div>
             </div>
             <div class="movie-card">
-            <div class="image-wrapper"><img src="./assets/stranger_things.jpg" alt="" /></div>
-            <div class="info">
-              <h3>Interstellar</h3>
-              <h5>2014</h5>
+              <div class="image-wrapper">
+                <img src="./assets/28yearslater.jpg" alt="" />
+              </div>
+              <div class="info">
+                <h3>Interstellar</h3>
+                <h5>2014</h5>
+              </div>
+            </div>
+            <div class="movie-card">
+              <div class="image-wrapper">
+                <img src="./assets/28yearslater.jpg" alt="" />
+              </div>
+              <div class="info">
+                <h3>Interstellar</h3>
+                <h5>2014</h5>
+              </div>
+            </div>
+            <div class="movie-card">
+              <div class="image-wrapper">
+                <img src="./assets/stranger_things.jpg" alt="" />
+              </div>
+              <div class="info">
+                <h3>Interstellar</h3>
+                <h5>2014</h5>
+              </div>
+            </div>
+            <div class="movie-card">
+              <div class="image-wrapper">
+                <img src="./assets/stranger_things.jpg" alt="" />
+              </div>
+              <div class="info">
+                <h3>Interstellar</h3>
+                <h5>2014</h5>
+              </div>
             </div>
           </div>
-          <div class="movie-card">
-            <div class="image-wrapper"><img src="./assets/stranger_things.jpg" alt="" /></div>
-            <div class="info">
-              <h3>Interstellar</h3>
-              <h5>2014</h5>
-            </div>
-          </div>
-          </div>
-      </div>
+        </div>
       </div>
       <div class="movie-list">
         <div class="description-wrapper">
@@ -190,22 +206,34 @@
         </div>
         <div class="romance">
           <div class="movie-card">
-            <div class="image-wrapper"><img src="./assets/28yearslater.jpg" alt="" /></div>
+            <div class="image-wrapper">
+              <img src="./assets/28yearslater.jpg" alt="" />
+            </div>
             <div class="info">
               <h3>Interstellar</h3>
               <h5>2014</h5>
             </div>
+          </div>
         </div>
+        <!-- </section> -->
+        <script src="./script.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
       </div>
     </section>
-
     <footer>
       <div class="foot">
-        <img src="./assets/logo.svg" alt="">
+        <img src="./assets/logo.svg" alt="CineVault logo" />
       </div>
-      
+      <div class="socials">
+        <a href="https://www.instagram.com/precious_segun/"><i class="fa-brands fa-instagram"></i></a>
+        <a href=""><i class="fa-brands fa-facebook"></i></a>
+        <a href=""><i class="fa-brands fa-linkedin"></i></a>
+      </div>
+      <div class="footer-right">
+        <p>&copy; 2025 CineVault</p>
+      </div>
     </footer>
-    <script src="./script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  
   </body>
 </html>

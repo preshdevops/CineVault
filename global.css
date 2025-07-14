@@ -23,3 +23,171 @@ body, html{
     font-family: 'Inter', sans-serif;
     background-color: var(--deep_blue) !important;
 }
+footer {
+    background: var(--nav_color);
+    position: relative;
+    top: 10px;
+    display: flex;
+    flex-direction: column;
+    height: 10rem;
+}
+ footer .foot img{
+    display: block;
+    justify-content: flex-start;
+    position: relative;
+    top: 4rem;
+    margin-left: 1.8rem;
+    width: 15%;
+}
+.socials {
+    gap: 20px;
+    display: flex;
+    color: var(--white);
+    display: flex;
+    justify-content: center;
+    position: relative;
+    top: 1.5rem;
+}
+.footer-right{
+    display: flex;
+    justify-content: end;
+    color: var(--white);
+    margin-right: 1.8rem;
+}
+@media (max-width: 1024px) {
+    .navigation {
+        width: 95%;
+    }
+
+    .search-bar {
+        width: 15rem;
+    }
+
+    .movies .featured {
+        height: 18rem;
+    }
+
+    .movie-card .image-wrapper img {
+        height: 180px;
+    }
+}
+
+@media (max-width: 768px) {
+    .navigation {
+        flex-direction: row;
+        padding: 0.5rem 0;
+    }
+    .navbar {
+    display: none;
+    flex-direction: column;
+    background-color: var(--nav_color);
+    width: 100%;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 10;
+  }
+
+  .navbar.show {
+    display: flex;
+  }
+
+  .hamburger {
+    display: block;
+    position: relative;
+    left: 7rem;
+  }
+
+  .navbar ul {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .search-bar {
+    width: 100%;
+    margin-top: 1rem;
+    display: none;
+  }
+
+
+    
+
+    .navigation nav ul {
+        flex-direction: column;
+        align-items: center;
+        margin-top: 0.5rem;
+    }
+
+    .navigation nav ul li {
+        margin: 0.5rem 0;
+    }
+
+    /* .search-bar {
+        width: 100%;
+        margin-top: 0.5rem;
+    } */
+
+    .movies {
+        width: 95%;
+    }
+
+    .movies .featured {
+        height: 15rem;
+    }
+    .movie-about h5{
+        font-weight: 700;
+        position: relative;
+        bottom: 2rem;
+    }
+
+    .movie-about h1 {
+        font-size: 1.2rem;
+        position: relative;
+        bottom: 2rem;
+        
+    }
+
+    .movie-about p {
+        font-size: 0.8rem;
+        position: relative;
+        bottom: 2rem;
+    }
+    .my-btn {
+        position: relative;
+        bottom: 2.5rem;
+    }
+
+    .trending-movies, .action-movies, .romance {
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    }
+
+    .movie-card .image-wrapper img {
+        height: 150px;
+    }
+    .people{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    /* grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); */
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 0 auto;
+    }
+     footer{
+        display: flex;
+    }
+    .foot img{
+        display: block;
+        position: relative;
+    }
+    .socials {
+        position: relative;
+        top: 3rem;
+    }
+    .footer-right {
+        position: relative;
+        top: 1.8rem;
+    }
+}

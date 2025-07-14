@@ -25,17 +25,28 @@
     <header>
       <div class="navigation">
         <img src="./assets/logo.svg" alt="" />
-        <nav class="navbar navbar-expand-md">
+        
+        <nav class="my-navbar show">
           <ul>
             <li><a href="index.html">Home</a></li>
-            <li><a href="genres.html">People</a></li>
+            <li><a href="people.html">People</a></li>
             <li><a href="watchlist.html">Watchlist</a></li>
           </ul>
         </nav>
+
+        <div class="hamburger" id="hamburger"><i class="fa-solid fa-bars"></i></div>
+
         <form action="">
           <div class="search-bar">
-            <input type="text" placeholder="Search movies....         " />
-            <i class="search-icon fa-solid fa-magnifying-glass"></i>
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="Search movies..."
+            />
+            <span class="search-icon"
+              ><i class="search-icon fa-solid fa-magnifying-glass"></i
+            ></span>
+            <div id="results" class="search-results"></div>
           </div>
         </form>
       </div>
@@ -45,11 +56,37 @@
        
     </div>
 
+    <footer>
+      <div class="foot">
+        <img src="./assets/logo.svg" alt="" />
+      </div>
+      <div class="socials">
+        <i class="fa-brands fa-instagram"></i>
+        <i class="fa-brands fa-facebook"></i>
+        <i class="fa-brands fa-linkedin"></i>
+      </div>
+      <div class="footer-right">
+        <p>&copy; 2025 CineVault</p>
+      </div>
+    </footer>
+
     <script>
       const apiKey = '9f2e12cbe9a18cbe4f36bedcb199814b';
       const peopleContainer = document.getElementById('people')
       // const params = new URLSearchParams(window.location.search);
       // const movieId = params.get('id');
+
+      document.addEventListener('DOMContentLoaded', () => {
+  const hamburger = document.getElementById('hamburger');
+  const navbar = document.querySelector('.my-navbar');
+
+  hamburger.addEventListener('click', () => {
+    console.log('Hamburger clicked'); // 👀 Should show in console
+    navbar.classList.toggle('show');
+  });
+});
+
+
 
       
 

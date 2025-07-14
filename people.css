@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    /* outline: 1px solid red; */
 }
 :root{
     --white: #F3F4F6;
@@ -35,40 +36,55 @@ header{
     margin-bottom: 2.5rem;
     z-index: 1000;
 }
-.navigation{
+
+.navigation {
     display: flex;
     justify-content: space-between;
-    width: 80%;
+    width: 90%; /* Slightly more flexible */
     margin: 0 auto;
-    padding: 0 auto;
-    padding-top: 1rem;
-    margin-bottom: auto;
-    position: sticky;
-    top: 0;
+    padding: 1rem 0;
+    align-items: center;
 }
-.navigation img{
+
+.hamburger {
+  display: none;
+  font-size: 1.8rem;
+  color: white;
+  cursor: pointer;
+  z-index: 50;
+}
+
+.navigation img {
     display: block;
-    margin-top: auto;
+    max-height: 2.5rem; /* Ensure logo scales */
 }
-.navigation nav ul li{
-    color: var(--navtext_about_color);
-    list-style: none;
+
+.my-navbar {
+  display: none !important; /* 👈 Crucial */
+}
+
+.navigation nav ul {
     display: flex;
-    margin: 15rem 1.5rem;
-    padding: 0 auto;
-    display: inline;
-    position: relative;
-    bottom: -0.5rem;
+    list-style: none;
 }
-.navigation nav ul li a{
+
+.navigation nav ul li {
+    color: var(--navtext_about_color);
+    margin: 0 1rem;
+    font-size: 1rem;
+}
+
+.navigation nav ul li a {
     text-decoration: none;
     color: var(--navtext_about_color);
 }
+
 .navigation nav ul li a:hover {
-  color: #A855F7; /* Light purple */
-  transition: 0.3s ease;
-  cursor: pointer;
+    color: #A855F7;
+    transition: 0.3s ease;
+    cursor: pointer;
 }
+
 
 .search-bar{
     background-color: var(--box_blue);
@@ -98,20 +114,6 @@ header{
   border: 1px solid #9333EA;
   box-shadow: 0 0 0 1px #A855F7;
 }
-.genres{
-    width: 80%;
-    margin: 0 auto;
-    padding: 0 auto;
-}
-.genres .genre-box{
-    display: flexbox;
-    background-color: var(--box_blue);
-    width: 5%;
-    height: 10%;
-}
-.genre-box h3{
-    color: var(--navtext_about_color);
-}
 .people{
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -134,3 +136,77 @@ header{
 .name p{
     color: var(--navtext_about_color);
 }
+
+/* @media (max-width: 768px) {
+    navigation {
+        width: 95%;
+    }
+
+    .search-bar {
+        width: 15rem;
+    }
+
+    .movies .featured {
+        height: 18rem;
+    }
+
+    .movie-card .image-wrapper img {
+        height: 180px;
+    }
+} */
+
+@media (max-width: 600px) {
+    .navigation {
+        flex-direction: row;
+        padding: 0.5rem 0;
+        /* display: none; */
+    }
+    .my-navbar {
+    /* display: none !important; */
+    flex-direction: column;
+    background-color: var(--nav_color);
+    width: 100%;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 999;
+  }
+
+  .my-navbar .show {
+    display: flex !important;
+  }
+
+  .hamburger {
+    display: block;
+    position: relative;
+    left: 7rem;
+    z-index: 1000;
+    
+  }
+
+  .my-navbar ul {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .search-bar {
+    width: 100%;
+    margin-top: 1rem;
+    display: none;
+  }
+
+    .people {
+        width: 95%;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 2fr));
+    }
+}
+
+@media (max-width: 1024px) {
+    .search-bar {
+        width: 100%;
+        margin-top: 1rem;
+    }
+    
+}
+

@@ -10,7 +10,7 @@
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
       rel="stylesheet"
-      integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
+      xintegrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
       crossorigin="anonymous"
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -19,8 +19,6 @@
       href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
       rel="stylesheet"
     />
-    <!-- <link rel="stylesheet" href="./genres.html">
-    <a href="http://"></a> -->
     <script
       src="https://kit.fontawesome.com/9a6b632d22.js"
       crossorigin="anonymous"
@@ -30,26 +28,174 @@
     <header>
       <div class="navigation">
         <img src="./assets/logo.svg" alt="" />
-        <nav class="navbar navbar-expand-md">
+        
+        <nav class="my-navbar show">
           <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="people.html">People</a></li>
             <li><a href="watchlist.html">Watchlist</a></li>
           </ul>
         </nav>
+
+        <div class="hamburger" id="hamburger"><i class="fa-solid fa-bars"></i></div>
+
         <form action="">
           <div class="search-bar">
-            <input type="text" id="searchInput" placeholder="Search movies..." />
-            <span class="search-icon"><i class="search-icon fa-solid fa-magnifying-glass"></i></span>
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="Search movies..."
+            />
+            <span class="search-icon"
+              ><i class="search-icon fa-solid fa-magnifying-glass"></i
+            ></span>
             <div id="results" class="search-results"></div>
           </div>
         </form>
       </div>
     </header>
-
     <section class="movie-list">
-      <h2>Available Movies</h2>
-      
+      <div class="movie-list-content">
+            <h2>Your Watchlist</h2>
+            <div class="watchlist-movies"></div>
+        </div>
     </section>
+   <footer>
+      <div class="foot">
+        <img src="./assets/logo.svg" alt="" />
+      </div>
+      <div class="socials">
+        <i class="fa-brands fa-instagram"></i>
+        <i class="fa-brands fa-facebook"></i>
+        <i class="fa-brands fa-linkedin"></i>
+      </div>
+      <div class="footer-right">
+        <p>&copy; 2025 CineVault</p>
+      </div>
+    </footer>
+
+    <script>
+      const IMG_BASE_URL = 'https://image.tmdb.org/t/p/original'; // Define IMG_BASE_URL here
+      const watchlistContainer = document.querySelector('.watchlist-movies');
+
+        function loadWatchlist() {
+            const watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
+            if (watchlist.length === 0) {
+                watchlistContainer.innerHTML = '<p class="no-movies">No movies in your watchlist yet.</p>';
+                return;
+            }
+
+            displayMovies(watchlist, watchlistContainer);
+        }
+
+        // Add to watchlist (example function, assuming called from movie.html)
+        function addToWatchlist(movie) {
+            const watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
+            if (!watchlist.some(item => item.id === movie.id)) {
+                watchlist.push(movie);
+                localStorage.setItem('watchlist', JSON.stringify(watchlist));
+            }
+        }
+
+        // Remove from watchlist
+        function removeFromWatchlist(movieId) {
+            let watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
+            watchlist = watchlist.filter(movie => movie.id !== movieId);
+            localStorage.setItem('watchlist', JSON.stringify(watchlist));
+            loadWatchlist();
+        }
+
+        // Modify displayMovies to include remove button
+        function displayMovies(movies, container) {
+            container.innerHTML = '';
+
+            movies.forEach(movie => {
+                const movieCard = document.createElement('div');
+                movieCard.classList.add('movie-card');
+
+                movieCard.innerHTML = `
+                    <a href="movie.html?id=${movie.id}">
+                        <div class="image-wrapper">
+                            <img src="${IMG_BASE_URL + movie.poster_path}" alt="${movie.title}" onerror="this.onerror=null;this.src='https://placehold.co/200x300/1F2937/FFFFFF?text=No+Image';" />
+                        </div>
+                        <div class="info">
+                            <h3>${movie.title}</h3>
+                            <h5>${movie.release_date?.slice(0, 4) || 'N/A'}</h5>
+                        </div>
+                    </a>
+                    <button class="remove-btn" onclick="removeFromWatchlist(${movie.id})">Remove</button>
+                `;
+
+                container.appendChild(movieCard);
+            });
+        }
+
+        // Load watchlist on page load
+        document.addEventListener('DOMContentLoaded', loadWatchlist);
+
+        // Debounce function for search input (copied from script.js)
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        // Search movies with debounce (copied from script.js, simplified for watchlist page)
+        const API_KEY = '9f2e12cbe9a18cbe4f36bedcb199814b'; // Define API_KEY here
+        const BASE_URL = 'https://api.themoviedb.org/3'; // Define BASE_URL here
+        const input = document.getElementById('searchInput');
+        const resultsDiv = document.getElementById('results');
+        const searchMovies = debounce((query) => {
+            if (query.length < 2) {
+                resultsDiv.innerHTML = '';
+                resultsDiv.style.display = 'none';
+                return;
+            }
+
+            fetch(`${BASE_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(query)}`)
+                .then(res => res.json())
+                .then(data => {
+                    const movies = data.results;
+                    resultsDiv.innerHTML = movies
+                        .map(movie => `
+                            <a href="movie.html?id=${movie.id}" class="search-result-item">
+                                <img src="${IMG_BASE_URL + (movie.poster_path || '/t/p/w92/no-poster.jpg')}" alt="${movie.title}" onerror="this.onerror=null;this.src='https://placehold.co/40x60/1F2937/FFFFFF?text=No+Image';" />
+                                <div>
+                                    <p>${movie.title}</p>
+                                    <span>(${movie.release_date?.slice(0, 4) || 'N/A'})</span>
+                                </div>
+                            </a>
+                        `)
+                        .join('');
+                    resultsDiv.style.display = movies.length ? 'block' : 'none';
+                })
+                .catch(err => {
+                    console.error(err);
+                    resultsDiv.innerHTML = '<p class="error">Failed to fetch movies 🥲</p>';
+                    resultsDiv.style.display = 'block';
+                });
+        }, 300);
+
+        // Event listener for search input
+        input.addEventListener('input', (e) => {
+            const query = e.target.value.trim();
+            searchMovies(query);
+        });
+
+        // Clear results when clicking outside
+        document.addEventListener('click', (e) => {
+            const searchBar = document.querySelector('.search-bar');
+            if (!searchBar.contains(e.target) && !resultsDiv.contains(e.target)) {
+                resultsDiv.innerHTML = '';
+                resultsDiv.style.display = 'none';
+            }
+        });
+    </script>
 </body>
 </html>

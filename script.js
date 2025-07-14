@@ -16,6 +16,17 @@ const romanceContainer = document.querySelector('.romance');
 const search = document.querySelector('.search-bar');
 const input = document.getElementById('searchInput');
 const resultsDiv = document.getElementById('results');
+const movies = document.querySelector('.movies')
+
+
+ document.addEventListener('DOMContentLoaded', () => {
+  const hamburger = document.getElementById('hamburger');
+  const navbar = document.querySelector('.navbar');
+
+  hamburger.addEventListener('click', () => {
+    navbar.classList.toggle('show');
+  });
+});
 
 function debounce(func, wait) {
   let timeout;
@@ -45,6 +56,7 @@ const searchMovies = debounce((query) => {
         .map(movie => `
           <div class="search-result-item">
             <img src="${IMG_BASE_URL + (movie.poster_path || '/t/p/w92/no-poster.jpg')}" alt="${movie.title}" />
+            
             <div>
               <p>${movie.title}</p>
               <span>(${movie.release_date?.slice(0, 4) || 'N/A'})</span>
@@ -110,7 +122,22 @@ function getRomanceMovies() {
     .catch(err => console.error('Error fetching romance movies:', err));
 }
 // Render the Featured Movie
+// let currentFeaturedMovie = null;
+
+// function displayFeatured(movie) {
+//   featuredTitle.textContent = movie.title;
+//   featuredDescription.textContent = movie.overview;
+
+//   featured.style.backgroundImage = `url(${IMG_BASE_URL + movie.backdrop_path})`;
+//   featured.style.backgroundSize = 'cover';
+//   featured.style.backgroundPosition = 'center';
+//   featured.style.backgroundRepeat = 'no-repeat';
+
+  
+// }
 function displayFeatured(movie) {
+  currentFeaturedMovie = movie;
+
   featuredTitle.textContent = movie.title;
   featuredDescription.textContent = movie.overview;
 
@@ -118,7 +145,20 @@ function displayFeatured(movie) {
   featured.style.backgroundSize = 'cover';
   featured.style.backgroundPosition = 'center';
   featured.style.backgroundRepeat = 'no-repeat';
+
+  const featuredBtn = document.getElementById('add-to-watchlist-featured');
+  if (featuredBtn) {
+    featuredBtn.onclick = () => {
+      addToWatchlist(currentFeaturedMovie);
+      alert(`${currentFeaturedMovie.title} added to your watchlist! 🎉`);
+    };
+  } else {
+    console.warn('❌ featuredBtn not found. Make sure the ID is correct.');
+  }
 }
+
+
+
 // display view all
 
 
@@ -155,27 +195,40 @@ function searchBar() {
 //     container.innerHTML += movieCard;
 //   });
 // }
+// 
 function displayMovies(movies, container) {
   container.innerHTML = '';
-
   movies.forEach(movie => {
     const movieCard = document.createElement('div');
     movieCard.classList.add('movie-card');
-
     movieCard.innerHTML = `
       <a href="movie.html?id=${movie.id}">
         <div class="image-wrapper">
-          <img src="${IMG_BASE_URL + movie.poster_path}" alt="${movie.title}" />
+          <img src="${movie.poster_path ? IMG_BASE_URL + movie.poster_path : 'no-poster.jpg'}" alt="${movie.title} poster" />
+          <i class="fa-solid fa-plus plus" data-id="${movie.id}"></i>
         </div>
         <div class="info">
           <h3>${movie.title}</h3>
-          <h5>${movie.release_date?.slice(0, 8)}</h5>
+          <h5>${movie.release_date?.slice(0, 8) || 'N/A'}</h5>
         </div>
       </a>
     `;
-
     container.appendChild(movieCard);
+    const plusIcon = movieCard.querySelector('.plus');
+    plusIcon.addEventListener('click', (e) => {
+      e.preventDefault();
+      addToWatchlist(movie);
+      alert(`${movie.title} added to your watchlist! 🎉`);
+    });
   });
+}
+
+function addToWatchlist(movie) {
+  let watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
+  if (!watchlist.some(m => m.id === movie.id)) {
+    watchlist.push({ id: movie.id, title: movie.title, poster_path: movie.poster_path });
+    localStorage.setItem('watchlist', JSON.stringify(watchlist));
+  }
 }
 
 

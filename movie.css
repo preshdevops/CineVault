@@ -35,26 +35,37 @@ header{
     margin-bottom: 2.5rem;
     z-index: 1000;
 }
-.navigation{
+
+.navigation {
     display: flex;
     justify-content: space-between;
-    width: 80%;
+    width: 90%; /* Slightly more flexible */
     margin: 0 auto;
-    padding: 0 auto;
-    padding-top: 1rem;
-    margin-bottom: auto;
-    position: sticky;
-    top: 0;
+    padding: 1rem 0;
+    /* align-items: center; */
 }
-.navigation img{
+
+.hamburger {
+  display: none;
+  font-size: 1.8rem;
+  color: white;
+  cursor: pointer;
+}
+
+.navigation img {
     display: block;
-    margin-top: auto;
+    max-height: 2.5rem; /* Ensure logo scales */
+}
+
+.navigation nav ul {
+    display: flex;
+    list-style: none;
 }
 .navigation nav ul li{
     color: var(--navtext_about_color);
     list-style: none;
     display: flex;
-    margin: 15rem 1.5rem;
+    margin: 0 1.5rem;
     padding: 0 auto;
     display: inline;
     position: relative;
@@ -118,4 +129,72 @@ header{
 .about-container{
     margin-left: auto;
     color: var(--navtext_about_color);
+}
+@media (max-width: 600px) {
+    /* .navigation {
+        width: 95%;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    } */
+    .navigation {
+        flex-direction: row;
+        padding: 0.5rem 0;
+        /* display: none; */
+    }
+    .navbar {
+    /* display: none !important; */
+    flex-direction: column;
+    background-color: var(--nav_color);
+    width: 100%;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 999;
+    display: none !important;
+  }
+
+  .navbar .show {
+    display: flex !important;
+  }
+
+  .hamburger {
+    display: block;
+    position: relative;
+    left: 7rem;
+    z-index: 1000;
+    
+  }
+
+
+    .navigation nav ul li {
+        margin: 0.5rem;
+    }
+
+    .search-bar {
+        width: 100%;
+        margin-bottom: 1rem;
+        display: none;
+    }
+
+    .movie-details {
+        width: 95%;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .movie-details .image img {
+        width: 100%;
+        max-width: 300px;
+        height: auto;
+    }
+
+    .about-container {
+        margin: 0;
+        text-align: center;
+    }
+
+    .about-container h1 {
+        font-size: 24px;
+    }
 }
