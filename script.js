@@ -54,17 +54,17 @@ const searchMovies = debounce((query) => {
       const movies = data.results;
       resultsDiv.innerHTML = movies
         .map(movie => `
-          <div class="search-result-item">
+          <a href="movie.html?id=${movie.id}" class="search-result-item">
             <img src="${IMG_BASE_URL + (movie.poster_path || '/t/p/w92/no-poster.jpg')}" alt="${movie.title}" loading="lazy"/>
             
             <div>
               <p>${movie.title}</p>
               <span>(${movie.release_date?.slice(0, 4) || 'N/A'})</span>
             </div>
-          </div>
+          </a>
         `)
         .join('');
-      resultsDiv.style.display = movies.length ? 'block' : 'none';
+      resultsDiv.style.display = movies.length ? 'block' : 'none'
     })
     .catch(err => {
       console.error(err);

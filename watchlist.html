@@ -29,7 +29,7 @@
       <div class="navigation">
         <img src="./assets/logo.svg" alt="" />
         
-        <nav class="my-navbar show">
+        <nav class="my-navbar">
           <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="people.html">People</a></li>
@@ -77,6 +77,16 @@
     <script>
       const IMG_BASE_URL = 'https://image.tmdb.org/t/p/original'; // Define IMG_BASE_URL here
       const watchlistContainer = document.querySelector('.watchlist-movies');
+
+      document.addEventListener('DOMContentLoaded', () => {
+  const hamburger = document.getElementById('hamburger');
+  const navbar = document.querySelector('.my-navbar');
+
+  hamburger.addEventListener('click', () => {
+    console.log('Hamburger clicked'); // 👀 Should show in console
+    navbar.classList.toggle('show');
+  });
+});
 
         function loadWatchlist() {
             const watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];

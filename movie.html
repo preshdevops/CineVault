@@ -27,7 +27,7 @@
       <div class="navigation">
         <img src="./assets/logo.svg" alt="Website logo" />
         <div class="hamburger" id="hamburger"><i class="fa-solid fa-bars"></i></div>
-        <nav class="navbar">
+        <nav class="my-navbar">
           <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="people.html">People</a></li>
@@ -73,7 +73,7 @@
 
       document.addEventListener('DOMContentLoaded', () => {
       const hamburger = document.getElementById('hamburger');
-      const navbar = document.querySelector('.navbar');
+      const navbar = document.querySelector('.my-navbar');
 
       hamburger.addEventListener('click', () => {
     navbar.classList.toggle('show');

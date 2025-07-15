@@ -185,6 +185,8 @@ header{
     padding: 2rem 0;
     position: relative;
     bottom: 3rem;
+    flex: 1;
+    min-height: 100vh;
 }
 
 .movie-list-content {
@@ -303,6 +305,10 @@ footer {
 
 /* Media Queries */
 @media (max-width: 1024px) {
+    body{
+        overflow-x: hidden;
+        /* overflow-y: hidden; */
+    }
     .navigation {
         width: 95%;
     }
@@ -336,18 +342,22 @@ footer {
     width: 100%;
     position: absolute;
     top: 100%;
-    left: 0;
+    left: 17rem;
     z-index: 10;
   }
 
-  .my-navbar .show {
+  .my-navbar.show {
     display: flex !important;
+    position: absolute;
+    left: 1rem;
   }
 
   .hamburger {
     display: block !important;
-    position: relative;
+    position: static;
     left: 7rem;
+    flex-shrink: 0;
+    
   }
 
   .my-navbar ul {
@@ -356,10 +366,15 @@ footer {
     padding: 1rem;
   }
 
-  .search-bar {
-    width: 100%;
+   .search-bar {
+    width: 80%;
+    /* display: block; */
     margin-top: 1rem;
-    display: none;
+    /* display: none; */
+    align-items: center;
+    bottom: 0.6rem;
+    
+
   }
 
 

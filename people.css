@@ -156,6 +156,9 @@ header{
 } */
 
 @media (max-width: 600px) {
+    body{
+        overflow-x: hidden;
+    }
     .navigation {
         flex-direction: row;
         padding: 0.5rem 0;
@@ -170,15 +173,16 @@ header{
     top: 100%;
     left: 0;
     z-index: 999;
+    display: none !important;
   }
 
-  .my-navbar .show {
+  .my-navbar.show {
     display: flex !important;
   }
 
   .hamburger {
     display: block;
-    position: relative;
+    position: static;
     left: 7rem;
     z-index: 1000;
     
@@ -191,9 +195,12 @@ header{
   }
 
   .search-bar {
-    width: 100%;
+    width: 80%;
+    /* display: block; */
     margin-top: 1rem;
-    display: none;
+    /* display: none; */
+    align-items: end;
+    bottom: 0.6rem;
   }
 
     .people {
