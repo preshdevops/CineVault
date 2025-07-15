@@ -55,7 +55,7 @@ const searchMovies = debounce((query) => {
       resultsDiv.innerHTML = movies
         .map(movie => `
           <div class="search-result-item">
-            <img src="${IMG_BASE_URL + (movie.poster_path || '/t/p/w92/no-poster.jpg')}" alt="${movie.title}" />
+            <img src="${IMG_BASE_URL + (movie.poster_path || '/t/p/w92/no-poster.jpg')}" alt="${movie.title}" loading="lazy"/>
             
             <div>
               <p>${movie.title}</p>
@@ -204,7 +204,7 @@ function displayMovies(movies, container) {
     movieCard.innerHTML = `
       <a href="movie.html?id=${movie.id}">
         <div class="image-wrapper">
-          <img src="${movie.poster_path ? IMG_BASE_URL + movie.poster_path : 'no-poster.jpg'}" alt="${movie.title} poster" />
+          <img src="${movie.poster_path ? IMG_BASE_URL + movie.poster_path : 'no-poster.jpg'}" alt="${movie.title} poster" loading="lazy" />
           <i class="fa-solid fa-plus plus" data-id="${movie.id}"></i>
         </div>
         <div class="info">

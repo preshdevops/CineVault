@@ -60,7 +60,7 @@ header{
 }
 
 .my-navbar {
-  display: none !important; /* 👈 Crucial */
+  display: inline !important; /* 👈 Crucial */
 }
 
 .navigation nav ul {

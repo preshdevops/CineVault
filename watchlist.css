@@ -293,8 +293,9 @@ header{
     max-width: 500px;
 }
 footer {
-    position: relative;
+    position: sticky;
     top: 59px;
+    z-index: 1000;
 }
 
 /* Footer */

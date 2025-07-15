@@ -88,7 +88,7 @@
             displayMovies(watchlist, watchlistContainer);
         }
 
-        // Add to watchlist (example function, assuming called from movie.html)
+        // Add to watchlist (example function, assuming I called from movie.html)
         function addToWatchlist(movie) {
             const watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
             if (!watchlist.some(item => item.id === movie.id)) {

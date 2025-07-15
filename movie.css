@@ -130,6 +130,9 @@ header{
     margin-left: auto;
     color: var(--navtext_about_color);
 }
+.trailer h3{
+    color: white;
+}
 @media (max-width: 600px) {
     /* .navigation {
         width: 95%;
