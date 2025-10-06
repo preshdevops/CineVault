@@ -204,3 +204,13 @@ header{
         font-size: 24px;
     }
 }
+@media (max-width: 1024px) {
+    .search-bar {
+        width: auto;
+    }
+    .movie-details .image img {
+        width: 100%;
+        max-width: 300px;
+        height: auto;
+    }
+}

@@ -160,8 +160,12 @@ header{
         overflow-x: hidden;
     }
     .navigation {
-        flex-direction: row;
+        /* flex-direction: row; */
         padding: 0.5rem 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5rem 1rem;
         /* display: none; */
     }
     .my-navbar {
@@ -178,13 +182,17 @@ header{
 
   .my-navbar.show {
     display: flex !important;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1rem; /* controls left/right spacing */
+    
   }
 
   .hamburger {
     display: block;
-    position: static;
-    left: 7rem;
-    z-index: 1000;
+    /* position: static; */
+    /* left: 100rem; */
+    /* z-index: 1000; */
     
   }
 
