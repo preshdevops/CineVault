@@ -28,7 +28,7 @@ API (Optional)	TMDB / OMDb API
 
 1. Clone the repository
 
-git clone https://github.com/yourusername/cinevault.git
+git clone https://github.com/preshdevops/CineVault.git
 
 
 2. Open the project
