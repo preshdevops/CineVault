@@ -29,6 +29,20 @@
       crossorigin="anonymous"
     ></script>
   </head>
+  <!-- Google tag (gtag.js) -->
+  <script
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=G-1QRZBSGD3X"
+  ></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+
+    gtag("config", "G-1QRZBSGD3X");
+  </script>
   <body>
     <header>
       <div class="navigation">
@@ -53,7 +67,9 @@
             <div id="results" class="search-results"></div>
           </div>
         </form>
-        <div class="hamburger" id="hamburger"><i class="fa-solid fa-bars"></i></div>
+        <div class="hamburger" id="hamburger">
+          <i class="fa-solid fa-bars"></i>
+        </div>
       </div>
     </header>
 
@@ -71,7 +87,12 @@
             <button type="button" name="" id="" class="btn btn-primary btn-one">
               Watch now
             </button>
-            <button type="button" name="" id="add-to-watchlist-featured" class="btn btn-primary btn-two" >
+            <button
+              type="button"
+              name=""
+              id="add-to-watchlist-featured"
+              class="btn btn-primary btn-two"
+            >
               Add to Watchlist
             </button>
           </div>
@@ -225,7 +246,9 @@
         <img src="./assets/logo.svg" alt="CineVault logo" />
       </div>
       <div class="socials">
-        <a href="https://www.instagram.com/precious_segun/"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://www.instagram.com/precious_segun/"
+          ><i class="fa-brands fa-instagram"></i
+        ></a>
         <a href=""><i class="fa-brands fa-facebook"></i></a>
         <a href=""><i class="fa-brands fa-linkedin"></i></a>
       </div>
@@ -233,7 +256,5 @@
         <p>&copy; 2025 CineVault</p>
       </div>
     </footer>
-
-  
   </body>
 </html>

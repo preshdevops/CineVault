@@ -22,11 +22,27 @@
       crossorigin="anonymous"
     ></script>
   </head>
+  <!-- Google tag (gtag.js) -->
+  <script
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=G-1QRZBSGD3X"
+  ></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+
+    gtag("config", "G-1QRZBSGD3X");
+  </script>
   <body>
     <header>
       <div class="navigation">
         <img src="./assets/logo.svg" alt="Website logo" />
-        <div class="hamburger" id="hamburger"><i class="fa-solid fa-bars"></i></div>
+        <div class="hamburger" id="hamburger">
+          <i class="fa-solid fa-bars"></i>
+        </div>
         <nav class="my-navbar">
           <ul>
             <li><a href="index.html">Home</a></li>
@@ -71,14 +87,14 @@
       const params = new URLSearchParams(window.location.search);
       const movieId = params.get("id");
 
-      document.addEventListener('DOMContentLoaded', () => {
-      const hamburger = document.getElementById('hamburger');
-      const navbar = document.querySelector('.my-navbar');
+      document.addEventListener("DOMContentLoaded", () => {
+        const hamburger = document.getElementById("hamburger");
+        const navbar = document.querySelector(".my-navbar");
 
-      hamburger.addEventListener('click', () => {
-    navbar.classList.toggle('show');
-  });
-});
+        hamburger.addEventListener("click", () => {
+          navbar.classList.toggle("show");
+        });
+      });
 
       // Add to watchlist function
       function addToWatchlist(movie) {
@@ -107,18 +123,26 @@
           document.getElementById("movie-details").innerHTML = `
             <div class="image">
               <img 
-                src="${movie.poster_path 
-                  ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` 
-                  : "no-poster.jpg"}" 
+                src="${
+                  movie.poster_path
+                    ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                    : "no-poster.jpg"
+                }" 
                 alt="${movie.title} poster" 
               />
             </div>  
             <div class="about-container">
               <h1>${movie.title}</h1>
               <h2>${movie.tagline || "No tagline available"}</h2>
-              <p class="date"><strong>Release Date:</strong> ${movie.release_date || "N/A"}</p>
-              <p><strong>Overview:</strong> ${movie.overview || "No overview available"}</p>
-              <p><strong>Rating:</strong> ${movie.vote_average ? movie.vote_average.toFixed(1) : "N/A"} / 10</p>
+              <p class="date"><strong>Release Date:</strong> ${
+                movie.release_date || "N/A"
+              }</p>
+              <p><strong>Overview:</strong> ${
+                movie.overview || "No overview available"
+              }</p>
+              <p><strong>Rating:</strong> ${
+                movie.vote_average ? movie.vote_average.toFixed(1) : "N/A"
+              } / 10</p>
               <button 
                 class="btn btn-primary" 
                 onclick="addToWatchlist({
@@ -150,7 +174,9 @@
         .then((res) => {
           console.log("Movie videos:", res);
           // Optionally embed a trailer here, e.g., YouTube iframe for the first trailer
-          const trailer = res.results.find((video) => video.type === "Trailer" && video.site === "YouTube");
+          const trailer = res.results.find(
+            (video) => video.type === "Trailer" && video.site === "YouTube"
+          );
           if (trailer) {
             document.getElementById("movie-details").innerHTML += `
               <div class="trailer">

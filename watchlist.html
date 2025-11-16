@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Watchlist</title>
-    <link rel="shortcut icon" href="assets/icon.png" type="image/x-icon">
-    <link rel="stylesheet" href="global.css">
-    <link rel="stylesheet" href="watchlist.css">
+    <link rel="shortcut icon" href="assets/icon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="global.css" />
+    <link rel="stylesheet" href="watchlist.css" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -23,12 +23,26 @@
       src="https://kit.fontawesome.com/9a6b632d22.js"
       crossorigin="anonymous"
     ></script>
-</head>
-<body>
+  </head>
+  <!-- Google tag (gtag.js) -->
+  <script
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=G-1QRZBSGD3X"
+  ></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+
+    gtag("config", "G-1QRZBSGD3X");
+  </script>
+  <body>
     <header>
       <div class="navigation">
         <img src="./assets/logo.svg" alt="" />
-        
+
         <nav class="my-navbar">
           <ul>
             <li><a href="index.html">Home</a></li>
@@ -37,7 +51,9 @@
           </ul>
         </nav>
 
-        <div class="hamburger" id="hamburger"><i class="fa-solid fa-bars"></i></div>
+        <div class="hamburger" id="hamburger">
+          <i class="fa-solid fa-bars"></i>
+        </div>
 
         <form action="">
           <div class="search-bar">
@@ -56,11 +72,11 @@
     </header>
     <section class="movie-list">
       <div class="movie-list-content">
-            <h2>Your Watchlist</h2>
-            <div class="watchlist-movies"></div>
-        </div>
+        <h2>Your Watchlist</h2>
+        <div class="watchlist-movies"></div>
+      </div>
     </section>
-   <footer>
+    <footer>
       <div class="foot">
         <img src="./assets/logo.svg" alt="" />
       </div>
@@ -75,137 +91,161 @@
     </footer>
 
     <script>
-      const IMG_BASE_URL = 'https://image.tmdb.org/t/p/original'; // Define IMG_BASE_URL here
-      const watchlistContainer = document.querySelector('.watchlist-movies');
+      const IMG_BASE_URL = "https://image.tmdb.org/t/p/original"; // Define IMG_BASE_URL here
+      const watchlistContainer = document.querySelector(".watchlist-movies");
 
-      document.addEventListener('DOMContentLoaded', () => {
-  const hamburger = document.getElementById('hamburger');
-  const navbar = document.querySelector('.my-navbar');
+      document.addEventListener("DOMContentLoaded", () => {
+        const hamburger = document.getElementById("hamburger");
+        const navbar = document.querySelector(".my-navbar");
 
-  hamburger.addEventListener('click', () => {
-    console.log('Hamburger clicked'); // 👀 Should show in console
-    navbar.classList.toggle('show');
-  });
-});
+        hamburger.addEventListener("click", () => {
+          console.log("Hamburger clicked"); // 👀 Should show in console
+          navbar.classList.toggle("show");
+        });
+      });
 
-        function loadWatchlist() {
-            const watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
-            if (watchlist.length === 0) {
-                watchlistContainer.innerHTML = '<p class="no-movies">No movies in your watchlist yet.</p>';
-                return;
-            }
-
-            displayMovies(watchlist, watchlistContainer);
+      function loadWatchlist() {
+        const watchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
+        if (watchlist.length === 0) {
+          watchlistContainer.innerHTML =
+            '<p class="no-movies">No movies in your watchlist yet.</p>';
+          return;
         }
 
-        // Add to watchlist (example function, assuming I called from movie.html)
-        function addToWatchlist(movie) {
-            const watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
-            if (!watchlist.some(item => item.id === movie.id)) {
-                watchlist.push(movie);
-                localStorage.setItem('watchlist', JSON.stringify(watchlist));
-            }
+        displayMovies(watchlist, watchlistContainer);
+      }
+
+      // Add to watchlist (example function, assuming I called from movie.html)
+      function addToWatchlist(movie) {
+        const watchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
+        if (!watchlist.some((item) => item.id === movie.id)) {
+          watchlist.push(movie);
+          localStorage.setItem("watchlist", JSON.stringify(watchlist));
         }
+      }
 
-        // Remove from watchlist
-        function removeFromWatchlist(movieId) {
-            let watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
-            watchlist = watchlist.filter(movie => movie.id !== movieId);
-            localStorage.setItem('watchlist', JSON.stringify(watchlist));
-            loadWatchlist();
-        }
+      // Remove from watchlist
+      function removeFromWatchlist(movieId) {
+        let watchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
+        watchlist = watchlist.filter((movie) => movie.id !== movieId);
+        localStorage.setItem("watchlist", JSON.stringify(watchlist));
+        loadWatchlist();
+      }
 
-        // Modify displayMovies to include remove button
-        function displayMovies(movies, container) {
-            container.innerHTML = '';
+      // Modify displayMovies to include remove button
+      function displayMovies(movies, container) {
+        container.innerHTML = "";
 
-            movies.forEach(movie => {
-                const movieCard = document.createElement('div');
-                movieCard.classList.add('movie-card');
+        movies.forEach((movie) => {
+          const movieCard = document.createElement("div");
+          movieCard.classList.add("movie-card");
 
-                movieCard.innerHTML = `
+          movieCard.innerHTML = `
                     <a href="movie.html?id=${movie.id}">
                         <div class="image-wrapper">
-                            <img src="${IMG_BASE_URL + movie.poster_path}" alt="${movie.title}" onerror="this.onerror=null;this.src='https://placehold.co/200x300/1F2937/FFFFFF?text=No+Image';" />
+                            <img src="${
+                              IMG_BASE_URL + movie.poster_path
+                            }" alt="${
+            movie.title
+          }" onerror="this.onerror=null;this.src='https://placehold.co/200x300/1F2937/FFFFFF?text=No+Image';" />
                         </div>
                         <div class="info">
                             <h3>${movie.title}</h3>
-                            <h5>${movie.release_date?.slice(0, 4) || 'N/A'}</h5>
+                            <h5>${movie.release_date?.slice(0, 4) || "N/A"}</h5>
                         </div>
                     </a>
-                    <button class="remove-btn" onclick="removeFromWatchlist(${movie.id})">Remove</button>
+                    <button class="remove-btn" onclick="removeFromWatchlist(${
+                      movie.id
+                    })">Remove</button>
                 `;
 
-                container.appendChild(movieCard);
-            });
+          container.appendChild(movieCard);
+        });
+      }
+
+      // Load watchlist on page load
+      document.addEventListener("DOMContentLoaded", loadWatchlist);
+
+      // Debounce function for search input (copied from script.js)
+      function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+          const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+          };
+          clearTimeout(timeout);
+          timeout = setTimeout(later, wait);
+        };
+      }
+
+      // Search movies with debounce (copied from script.js, simplified for watchlist page)
+      const API_KEY = "9f2e12cbe9a18cbe4f36bedcb199814b"; // Define API_KEY here
+      const BASE_URL = "https://api.themoviedb.org/3"; // Define BASE_URL here
+      const input = document.getElementById("searchInput");
+      const resultsDiv = document.getElementById("results");
+      const searchMovies = debounce((query) => {
+        if (query.length < 2) {
+          resultsDiv.innerHTML = "";
+          resultsDiv.style.display = "none";
+          return;
         }
 
-        // Load watchlist on page load
-        document.addEventListener('DOMContentLoaded', loadWatchlist);
-
-        // Debounce function for search input (copied from script.js)
-        function debounce(func, wait) {
-            let timeout;
-            return function executedFunction(...args) {
-                const later = () => {
-                    clearTimeout(timeout);
-                    func(...args);
-                };
-                clearTimeout(timeout);
-                timeout = setTimeout(later, wait);
-            };
-        }
-
-        // Search movies with debounce (copied from script.js, simplified for watchlist page)
-        const API_KEY = '9f2e12cbe9a18cbe4f36bedcb199814b'; // Define API_KEY here
-        const BASE_URL = 'https://api.themoviedb.org/3'; // Define BASE_URL here
-        const input = document.getElementById('searchInput');
-        const resultsDiv = document.getElementById('results');
-        const searchMovies = debounce((query) => {
-            if (query.length < 2) {
-                resultsDiv.innerHTML = '';
-                resultsDiv.style.display = 'none';
-                return;
-            }
-
-            fetch(`${BASE_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(query)}`)
-                .then(res => res.json())
-                .then(data => {
-                    const movies = data.results;
-                    resultsDiv.innerHTML = movies
-                        .map(movie => `
-                            <a href="movie.html?id=${movie.id}" class="search-result-item">
-                                <img src="${IMG_BASE_URL + (movie.poster_path || '/t/p/w92/no-poster.jpg')}" alt="${movie.title}" onerror="this.onerror=null;this.src='https://placehold.co/40x60/1F2937/FFFFFF?text=No+Image';" />
+        fetch(
+          `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(
+            query
+          )}`
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            const movies = data.results;
+            resultsDiv.innerHTML = movies
+              .map(
+                (movie) => `
+                            <a href="movie.html?id=${
+                              movie.id
+                            }" class="search-result-item">
+                                <img src="${
+                                  IMG_BASE_URL +
+                                  (movie.poster_path ||
+                                    "/t/p/w92/no-poster.jpg")
+                                }" alt="${
+                  movie.title
+                }" onerror="this.onerror=null;this.src='https://placehold.co/40x60/1F2937/FFFFFF?text=No+Image';" />
                                 <div>
                                     <p>${movie.title}</p>
-                                    <span>(${movie.release_date?.slice(0, 4) || 'N/A'})</span>
+                                    <span>(${
+                                      movie.release_date?.slice(0, 4) || "N/A"
+                                    })</span>
                                 </div>
                             </a>
-                        `)
-                        .join('');
-                    resultsDiv.style.display = movies.length ? 'block' : 'none';
-                })
-                .catch(err => {
-                    console.error(err);
-                    resultsDiv.innerHTML = '<p class="error">Failed to fetch movies 🥲</p>';
-                    resultsDiv.style.display = 'block';
-                });
-        }, 300);
+                        `
+              )
+              .join("");
+            resultsDiv.style.display = movies.length ? "block" : "none";
+          })
+          .catch((err) => {
+            console.error(err);
+            resultsDiv.innerHTML =
+              '<p class="error">Failed to fetch movies 🥲</p>';
+            resultsDiv.style.display = "block";
+          });
+      }, 300);
 
-        // Event listener for search input
-        input.addEventListener('input', (e) => {
-            const query = e.target.value.trim();
-            searchMovies(query);
-        });
+      // Event listener for search input
+      input.addEventListener("input", (e) => {
+        const query = e.target.value.trim();
+        searchMovies(query);
+      });
 
-        // Clear results when clicking outside
-        document.addEventListener('click', (e) => {
-            const searchBar = document.querySelector('.search-bar');
-            if (!searchBar.contains(e.target) && !resultsDiv.contains(e.target)) {
-                resultsDiv.innerHTML = '';
-                resultsDiv.style.display = 'none';
-            }
-        });
+      // Clear results when clicking outside
+      document.addEventListener("click", (e) => {
+        const searchBar = document.querySelector(".search-bar");
+        if (!searchBar.contains(e.target) && !resultsDiv.contains(e.target)) {
+          resultsDiv.innerHTML = "";
+          resultsDiv.style.display = "none";
+        }
+      });
     </script>
-</body>
+  </body>
 </html>
