@@ -211,7 +211,7 @@ a.search-result-item .error {
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  margin-bottom: 3px;
+  margin-bottom: 1.2rem;
 }
 
 .movie-about .my-btn .btn-primary {
@@ -230,6 +230,7 @@ a.search-result-item .error {
 .movie-about .my-btn .btn-two {
   background-color: var(--second_button);
   white-space: nowrap;
+  
 }
 
 /* Movie Cards */
