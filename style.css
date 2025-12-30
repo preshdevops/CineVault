@@ -207,6 +207,11 @@ a.search-result-item .error {
 .movie-about p {
   color: var(--navtext_about_color);
   font-size: 0.9rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: 3px;
 }
 
 .movie-about .my-btn .btn-primary {
